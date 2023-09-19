@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="Currency Conversion.css">
+</head>
+<body>
+    <header class="header">
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">Destinations</a>
+                        <div class="dropdown-content">
+                            <a href="#sabah">Sabah</a>
+                            <a href="#sarawak">Sarawak</a>
+                        </div>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Currency Conversion.html">Currency Conversion</a></li>
+                    <li><a href="AboutUs.html">About Us</a></li>
+                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="Contact Us.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <h1>Currency Converter</h1>
+
+    <main>
+        <section id="conversion-form">
+            <h2>Convert Currency to MYR</h2>
+            <form id="currency-converter-form">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" required>
+                <label for="from-currency">From Currency:</label>
+                <select id="from-currency" required>
+                    <option>USD</option>
+                    <option>EUR</option>
+                    <option>GBP</option>
+                    <option>JPY</option>
+                    <option>CHF</option>
+                    <option>CAD</option>
+                    <option>AUD</option>
+                    <option>CNY</option>
+                    <option>HKD</option>
+                    <option>SGD</option>
+                    <option>MXN</option>
+                    <option>WON</option>
+                </select>
+                <label for="to-currency">To Currency:</label>
+                <select id="to-currency" required>
+                    <option>MYR</option>
+                </select>
+                <button type="submit">Convert</button>
+            </form>
+        </section>
+
+        <section id="result">
+            <h2>Conversion Result</h2>
+            <div id="conversion-result">
+               
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#sabah">Sabah</a></li>
+                    <li><a href="#sarawak">Sarawak</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Currency Conversion.html">Currency Conversion</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="AboutUs.html">About Us</a></li>
+                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: travelpro@support.com</p>
+                <p>Phone: +6011-462-7221</p>
+                <p><a href="Contact Us.html">Contact Form</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Travel Pro [Sabah & Sarawak Travel Recommendation and Blog]
+        </div>
+    </footer>
+</body>
+</html>
