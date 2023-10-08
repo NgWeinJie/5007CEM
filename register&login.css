@@ -1,84 +1,112 @@
+
 body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background: #F1B267;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
-/* Style the page title */
-h1 {
-    font-size: 32px;
-    color: #333;
-    margin-top: 20px;
+/* Use a background video */
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* Place the video behind other content */
 }
 
-/* Style the form input fields */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.content {
     width: 90%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    max-width: 400px; /* Adjusted max-width for a slightly wider content container */
+    padding: 40px;
+    margin: 0% auto 0 !important;
+    margin-top: 10%; /* Adjust the top margin for vertical centering */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.content1{
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    max-width: 400px; /* Adjusted max-width for a slightly wider content container */
+    padding: 40px;
+    margin: 0% auto 0 !important;
+    margin-top: 10%; /* Adjust the top margin for vertical centering */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
     border-radius: 5px;
     font-size: 16px;
-    background-color: #f9f3ed;
+    padding: 12px;
 }
 
-/* Style the Register button */
-input[type="button"] {
-    background-color: #008000;
-    color: #fff;
-    padding: 12px 24px;
-    border: none;
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 18px;
+    padding: 12px 24px;
 }
 
-/* Style the table */
-table {
-    margin: 20px auto;
-    width: 80%;
-    background: #ECDBC7;
-    border-collapse: collapse;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
-/* Style the table cells */
-td {
-    padding: 10px;
-    text-align: left;
+.btn-block {
+    display: block;
+    width: 100%;
 }
 
-/* Style the logo image */
-img {
-    max-width: 100%;
-    height: auto;
+.text-center {
+    text-align: center;
+}
+
+/* Custom styles for form validation */
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+}
+
+/* Additional styling */
+.signup-link {
+    text-align: center;
     margin-top: 20px;
 }
 
-/* Style the form container */
-.form-container {
-    background: #ECDBC7;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 500px;
-}
-
-/* Add some spacing between form elements */
-.form-container form > * {
-    margin-bottom: 10px;
-}
-
-/* Style the form labels */
-.form-container label {
-    display: block;
+.signup-link a {
+    color: #007bff;
+    text-decoration: none;
     font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 16px;
 }
 
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Media query for iPhone 12 Pro */
+@media (max-width: 428px) {
+    .content {
+        margin-top: 20%;
+    }
+}

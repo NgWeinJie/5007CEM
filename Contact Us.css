@@ -32,3 +32,9 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0055CC;
 }
+
+.content {
+    padding-bottom: 100px;
+    padding-top: 20px;
+    background: linear-gradient(135deg, #a0c4e0, #f0f0f0, #a0c4e0);
+}

@@ -4,65 +4,103 @@
     <title>Currency Converter</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="Currency Conversion.css">
-</head>
-<body>
-    <header class="header">
-            <nav>
-                <ul>
-                    <li><a href="Home.html">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Destinations</a>
-                        <div class="dropdown-content">
-                            <a href="#sabah">Sabah</a>
-                            <a href="#sarawak">Sarawak</a>
+    <!-- Combined Bootstrap CSS, JavaScript dependencies, and Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    </head>
+    <body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Menu icon container -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myTopnav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav menu containing the list of links -->
+            <div class="collapse navbar-collapse" id="myTopnav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="destinationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
+                        <div class="dropdown-menu" aria-labelledby="destinationsDropdown">
+                            <a class="dropdown-item" href="#sabah">Sabah</a>
+                            <a class="dropdown-item" href="#sarawak">Sarawak</a>
                         </div>
-                    <li><a href="Blog.html">Blog</a></li>
-                    <li><a href="Currency Conversion.html">Currency Conversion</a></li>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
-                    <li><a href="Contact Us.html">Contact Us</a></li>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="Blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Currency Conversion.html">Currency Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Contact Us.html">Contact Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account_details.html">
+                            <i class="fas fa-user account-icon"></i> Account Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html">
+                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
+                        </a>
+                    </li>
                 </ul>
-            </nav>
-        </header>
+            </div>
+        </div>
+    </nav>
+</header>
 
         <h1>Currency Converter</h1>
 
-    <main>
-        <section id="conversion-form">
-            <h2>Convert Currency to MYR</h2>
-            <form id="currency-converter-form">
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" required>
-                <label for="from-currency">From Currency:</label>
-                <select id="from-currency" required>
-                    <option>USD</option>
-                    <option>EUR</option>
-                    <option>GBP</option>
-                    <option>JPY</option>
-                    <option>CHF</option>
-                    <option>CAD</option>
-                    <option>AUD</option>
-                    <option>CNY</option>
-                    <option>HKD</option>
-                    <option>SGD</option>
-                    <option>MXN</option>
-                    <option>WON</option>
-                </select>
-                <label for="to-currency">To Currency:</label>
-                <select id="to-currency" required>
-                    <option>MYR</option>
-                </select>
-                <button type="submit">Convert</button>
-            </form>
-        </section>
-
-        <section id="result">
-            <h2>Conversion Result</h2>
-            <div id="conversion-result">
-               
+<main class="py-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Currency Converter</h2>
+                    <form id="currency-converter-form">
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="from-currency">From Currency:</label>
+                                <select class="form-control" id="from-currency" required></select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="to-currency">To Currency:</label>
+                                <select class="form-control" id="to-currency" required>
+                                    <option>MYR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Convert</button>
+                    </form>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-6 mx-auto">
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Conversion Result</h2>
+                        <div id="conversion-result" class="text-center">
+                        <p style="font-size: 24px;">
+                            <!-- Display the conversion result here -->
+                            <span class="custom-text-color">
+                                <!-- Your result text goes here -->
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -92,5 +130,82 @@
             &copy; 2023 Travel Pro [Sabah & Sarawak Travel Recommendation and Blog]
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const converterForm = document.getElementById("currency-converter-form");
+        const amountInput = document.getElementById("amount");
+        const fromCurrencySelect = document.getElementById("from-currency");
+        const toCurrencySelect = document.getElementById("to-currency");
+        const resultDiv = document.getElementById("conversion-result");
+        const apiKey = '4bce6f56ffefa4fea4a06f9b340a75cf'; // Replace with your actual API key
+        const apiURL = 'http://data.fixer.io/api/latest?access_key=' + apiKey;
+
+        // Fetch currency exchange rates from the API
+        fetch(apiURL)
+            .then((response) => response.json())
+            .then((data) => {
+                const currencies = Object.keys(data.rates);
+
+                // Add currency options to the "From Currency" select element
+                currencies.forEach((currency) => {
+                    const option = document.createElement("option");
+                    option.value = currency;
+                    option.textContent = currency;
+                    fromCurrencySelect.appendChild(option);
+                });
+
+                // Add currency options to the "To Currency" select element
+                currencies.forEach((currency) => {
+                    const option = document.createElement("option");
+                    option.value = currency;
+                    option.textContent = currency;
+                    toCurrencySelect.appendChild(option);
+                });
+
+                // Handle form submission
+                converterForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    const amount = parseFloat(amountInput.value);
+                    const fromCurrency = fromCurrencySelect.value;
+                    const toCurrency = toCurrencySelect.value;
+
+                    if (isNaN(amount)) {
+                        alert("Please enter a valid amount.");
+                        return;
+                    }
+
+                    if (fromCurrency === toCurrency) {
+                        alert("Please select different currencies for conversion.");
+                        return;
+                    }
+
+                    // Fetch the exchange rate for the selected currencies
+                    const conversionRateFrom = data.rates[fromCurrency];
+                    const conversionRateTo = data.rates[toCurrency];
+
+                    if (!conversionRateFrom || !conversionRateTo) {
+                        alert("Currency conversion rate not available for the selected currencies.");
+                        return;
+                    }
+
+                    // Perform the currency conversion
+                    const convertedAmount = (amount / conversionRateFrom) * conversionRateTo;
+
+                    // Display the conversion result with color coding
+                    resultDiv.innerHTML = `
+                        <p style="font-size: 24px;">
+                            <span style="color: green;">${amount} ${fromCurrency}</span>
+                            is equal to
+                            <span style="color: red;">${convertedAmount.toFixed(2)} ${toCurrency}</span>
+                        </p>
+                    `;
+                });
+            })
+            .catch((error) => {
+                console.error("Error fetching exchange rates:", error);
+            });
+    });
+    </script>
 </body>
 </html>
