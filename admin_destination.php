@@ -113,8 +113,32 @@ if (!$result) {
             margin-right: 5px;
         }
     </style>
+    
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-lightblue">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="admin_destination.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Add Destination</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_contactform.php">User Contact Form</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 </head>
+
 <body>
+    <div class="table-responsive">
     <div class="container mt-5">
             <!-- Display success or error message -->
             <?php if (!empty($successMessage)): ?>
@@ -247,6 +271,7 @@ if (!$result) {
             </tbody>
         </table>
     </div>
+</div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

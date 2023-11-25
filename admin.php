@@ -78,8 +78,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -91,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .container {
-            background-color: #fff;
+            background-color: #edeff2;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -115,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         input[type="text"],
         textarea,
         input[type="number"] {
+            background-color: #edeff2;
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -122,11 +125,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         input[type="number"] {
+            background-color: #edeff2;
             step: 0.01;
         }
 
         input[type="submit"] {
-            background-color: #007bff;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -141,15 +144,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-lightblue">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_destination.php">Home</a>
+                    </li>
+                    <li class="nav-item active"">
+                        <a class="nav-link" href="admin.php">Add Destination</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin_contactform.php">User Contact Form</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <div class="container">
         <h1>Add Destination</h1>
         <form action="admin.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="ImageDestination">Upload Image (jpg, jpeg, png):</label>
-               <input type="file" class="form-control-file" name="ImageDestination">
+                <input type="file" class="form-control-file" name="ImageDestination">
             </div>
-            
+
             <div class="form-group">
                 <label for="locationName">Location Name:</label>
                 <input type="text" class="form-control" name="locationName" required>
@@ -189,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="googleMapsImageURL">Google Maps Image URL:</label>
                 <input type="text" class="form-control" name="googleMapsImageURL" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="state">State:</label>
                 <select class="form-control" name="state">
@@ -201,6 +225,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" class="btn btn-primary" value="Add Destination">
         </form>
     </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 

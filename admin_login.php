@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 session_regenerate_id(true);
 
                 // Redirect to admin dashboard
-                header("Location: admin.php");
+                header("Location: admin_destination.php");
                 exit;
             } else {
                 // Invalid password
