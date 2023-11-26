@@ -40,7 +40,9 @@ if ($num > 0) {
             "entranceFeeChildrenNonMalaysian" => $EntranceFeeChildrenNonMalaysian,
             "openHours" => $Open_Hours,
             "googleMapsImageURL" => $Google_Maps_Image_URL,
-            "state" => $State
+            "state" => $State,
+            "imageDestination" => $ImageDestination
+
         );
 
         array_push($destination_arr["records"], $destination_item);
