@@ -1,0 +1,40 @@
+/* Style the text input and select input */
+input[type="text"],
+input[type="text"]:focus,
+textarea,
+textarea:focus,
+select,
+select:focus {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f3ed;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #0077FF;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 70px;
+    display: block; /* Make the button a block element for centering */
+    margin-bottom: 80px;
+}
+
+/* Style the submit button on hover */
+input[type="submit"]:hover {
+    background-color: #0055CC;
+}
+
+.content {
+    padding-bottom: 100px;
+    padding-top: 20px;
+    background: linear-gradient(135deg, #a0c4e0, #f0f0f0, #a0c4e0);
+}

@@ -1,0 +1,306 @@
+/* Reset some default browser styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('image/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover; /* This property scales the image to cover the entire element. */
+    margin: 0;
+    padding: 0;
+}
+
+
+body::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust the opacity as needed */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind the content */
+}
+
+/* Style for the navigation bar */
+nav {
+    background-color: #333;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+
+/* Style the navigation links */
+.nav-menu-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    display: flex;
+    justify-content: space-between; /* Balance spacing */
+    width: 100%;
+}
+
+/* Style the navigation links */
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+}
+
+.header li {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Distribute available space evenly */
+}
+
+/* Make the navbar-nav ul element 100% width */
+.navbar-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* To balance the spacing of navigation items */
+}
+
+/* Style the links */
+li a {
+    color: white !important;
+    text-decoration: none;
+    padding: 10px; /* Adjust padding for balanced width */
+    display: block;
+    flex: 1; /* Distribute available space evenly */
+    box-sizing: border-box;
+    transition: color 0.3s;
+}
+
+/* Change the color on hover */
+.nav-menu-list li a:hover {
+    background-color: #555;
+    color: #ff6600;
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    background-color: #333 !important;
+    min-width: 185px !important;
+    z-index: 1 !important;
+}
+
+dropdown-item {
+    display: none !important;
+    position: absolute !important;
+    background-color: #333 !important;
+    min-width: 250px !important;
+    z-index: 1 !important;
+    top: 40px !important;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block !important;
+}
+
+/* Style the "Destinations" link within the dropdown */
+.dropdown-menu a:first-child {
+    color: white !important;
+    padding: 12px 16px !important;
+    text-decoration: none !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+/* Apply the hover effect to the "Destinations" link */
+.dropdown-menu:hover a:first-child:hover {
+    background-color: #555 !important;
+    color: #ff6600 !important;
+}
+
+/* Style the other links within the dropdown */
+.dropdown-menu a {
+    color: white !important;
+    padding: 12px 16px !important;
+    text-decoration: none !important;
+    display: block !important;
+    text-align: center !important;
+}
+
+/* Style the other links on hover */
+.dropdown-menu a:hover {
+    background-color: #555 !important;
+    color: #ff6600 !important;
+}
+
+/* Style the page title */
+h1 {
+    font-size: 32px;
+    color: #333;
+    margin-top: 20px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 0 10px;
+}
+
+.footer-section {
+    flex: 1;
+    text-align: left;
+    padding-left: 130px;
+}
+
+.footer-section h3 {
+    color: #ff6600;
+    font-size: 18px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-section a:hover {
+    color: #ff6600;
+}
+
+.copyright {
+    margin-top: 20px;
+}
+
+/* Style for the navigation menu */
+.nav-menu {
+    display: flex; /* Make it visible by default */
+}
+
+/* Top bar styles */
+.top-bar {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Menu icon container */
+.menu-icon-container {
+    display: none;
+}
+
+/* Menu icon styles */
+.menu-icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Display the navigation menu on larger screens */
+.header .nav-menu {
+    background-color: #333;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Change the color on hover */
+.nav-menu li a:hover {
+    background-color: #555;
+}
+
+.header ul li a:hover {
+    background-color: #555;
+    color: #ff6600 !important;
+}
+
+
+
+/* Media query for iPhone 12 Pro and smaller screens */
+@media only screen and (max-width: 428px) {
+    .menu-icon-container {
+        display: block;
+    }
+
+    .nav-menu-list {
+        display: none;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+.nav-menu-list.active {
+        display: flex;
+        flex-direction: column;
+        background-color: #333;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 1;
+    }
+
+    .top-bar .nav-menu-list li {
+        padding: 15px 0;
+        text-align: center;
+    }
+    
+    .footer-section {
+    padding-left: 100px;
+}
+    
+
+}

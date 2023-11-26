@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="Currency Conversion.css">
+    <!-- Combined Bootstrap CSS, JavaScript dependencies, and Font Awesome CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <?php include 'currency_converter.php'; ?>
+    
+
+    </head>
+
+    <body>
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <!-- Menu icon container -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myTopnav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Nav menu containing the list of links -->
+            <div class="collapse navbar-collapse" id="myTopnav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="destinationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
+                        <div class="dropdown-menu" aria-labelledby="destinationsDropdown">
+                            <a class="dropdown-item" href="#sabah">Sabah</a>
+                            <a class="dropdown-item" href="#sarawak">Sarawak</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="Blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Currency Conversion.html">Currency Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Contact Us.html">Contact Us</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="account_details.html">
+                            <i class="fas fa-user account-icon"></i> Account Details
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Login.html">
+                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<h1>Currency Converter</h1>
+<main class="py-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Currency Converter</h2>
+                    <form name="currency-converter-form" method="post" action="currency_converter.php">
+    <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" class="form-control" name="amount" id="amount" required>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="from-currency">From Currency:</label>
+ <select class="form-control" name="from_currency" id="from-currency" required>
+        <?php
+        // Generate the From Currency options
+        foreach ($currencies as $currency) {
+            echo "<option value='$currency'>$currency</option>";
+        }
+        ?>
+
+    </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="to-currency">To Currency:</label>
+    <select class="form-control" name="to_currency" id="to-currency" required>
+        <?php
+        // Generate the To Currency options
+        foreach ($currencies as $currency) {
+            echo "<option value='$currency'>$currency</option>";
+        }
+        ?>
+
+    </select>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="convert-button">Convert</button>
+</form>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-6 mx-auto">
+                <div class="card shadow p-4">
+                    <h2 class="text-center mb-4">Conversion Result</h2>
+                    <div id="conversion-result" class="text-center">
+                        <p style="font-size: 24px;">
+                            <!-- Display the conversion result from PHP -->
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#sabah">Sabah</a></li>
+                    <li><a href="#sarawak">Sarawak</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Currency Conversion.html">Currency Conversion</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="AboutUs.html">About Us</a></li>
+                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: travelpro@support.com</p>
+                <p>Phone: +6011-462-7221</p>
+                <p><a href="Contact Us.html">Contact Form</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Travel Pro [Sabah & Sarawak Travel Recommendation and Blog]
+        </div>
+    </footer>
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.forms["currency-converter-form"];
+        const amountInput = document.getElementById("amount");
+        const fromCurrencySelect = document.getElementById("from-currency");
+        const toCurrencySelect = document.getElementById("to-currency");
+        const resultDiv = document.getElementById("conversion-result");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const amount = parseFloat(amountInput.value);
+            const fromCurrency = fromCurrencySelect.value;
+            const toCurrency = toCurrencySelect.value;
+
+            if (isNaN(amount)) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            if (fromCurrency === toCurrency) {
+                alert("Please select different currencies for conversion.");
+                return;
+            }
+
+            fetch("currency_converter.php", {
+                method: "POST",
+                body: new URLSearchParams({
+                    amount: amount,
+                    from_currency: fromCurrency,
+                    to_currency: toCurrency,
+                }),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        resultDiv.innerHTML = `
+                            <p style="font-size: 24px;">
+                                <span style="color: green;">${amount} ${fromCurrency}</span>
+                                is equal to
+                                <span style="color: red;">${data.result} ${toCurrency}</span>
+                            </p>
+                        `;
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching conversion data:", error);
+                });
+        });
+    });
+</script>
+</body>
+</html>
