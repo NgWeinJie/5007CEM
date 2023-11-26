@@ -330,12 +330,12 @@ a:hover {
     border: 1px solid #0056b3;
 }
 
-/* Media query for iPhone 12 Pro and smaller screens in Home.css */
+
 @media only screen and (max-width: 428px) {
- /* Adjust the slideshow container for smaller screens */
+
     .slideshow-container {
         max-width: 100%;
-        margin-top: 0; /* Remove margin-top to align with the top bar */
+        margin-top: 0; 
     }
 
     
@@ -343,42 +343,41 @@ a:hover {
     max-height: 400px;
     }
     
-    /* Style the h1 heading for Sabah */
+
     h1#sabah, #sarawak {
         padding: 0px;
         width: 89%;
         margin: auto;
     }
 
-    /* Style the logo for smaller screens */
     .logo {
-        width: 80%; /* Adjust the logo size as needed */
+        width: 80%; 
     }
 
-    /* Reset the content styles for stacking destinations */
+
     .content {
-        flex-direction: column; /* Stack destinations on smaller screens */
+        flex-direction: column; 
         align-items: center;
-        padding: 20px; /* Add padding for spacing */
+        padding: 20px; 
     }
 
-    /* Adjust the destination width for full width on smaller screens */
+
     .destination {
-        width: 90%; /* Full width on smaller screens */
-        height: auto; /* Allow height to adjust based on content */
-        padding: 20px; /* Adjust padding as needed */
+        width: 90%; 
+        height: auto; 
+        padding: 20px; 
         margin-right: 0px;
     }
 
-    /* Style the table headers and cells within destinations on smaller screens */
+
     .destination table th,
     .destination table td {
-        padding: 5px; /* Adjust cell padding for smaller screens */
+        padding: 5px;
     }
 
-    /* Style the Google Maps image size for smaller screens */
+
     a[href^="https://goo.gl/maps/"] img {
-        width: 30px; /* Adjust the size of Google Maps icons */
+        width: 30px;
         height: 30px;
     }
     
@@ -394,13 +393,13 @@ a:hover {
     }
     
     .search-bar {
-        max-width: 300px; /* Adjust the maximum width for small screens */
+        max-width: 300px;
     }
 
     .search-bar input,
     .search-bar button {
-        padding: 10px; /* Adjust the padding for small screens */
-        height: 40px; /* Adjust the height for small screens */
+        padding: 10px; 
+        height: 40px; 
     }
 
 }

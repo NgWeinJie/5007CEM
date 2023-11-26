@@ -69,13 +69,6 @@ unset($_SESSION['errorMessage']);
             <div class="collapse navbar-collapse" id="myTopnav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="destinationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
-                        <div class="dropdown-menu" aria-labelledby="destinationsDropdown">
-                            <a class="dropdown-item" href="#sabah">Sabah</a>
-                            <a class="dropdown-item" href="#sarawak">Sarawak</a>
-                        </div>
-                    </li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
@@ -143,8 +136,6 @@ unset($_SESSION['errorMessage']);
             <div class="footer-section">
                 <h3>Explore</h3>
                 <ul>
-                    <li><a href="#sabah">Sabah</a></li>
-                    <li><a href="#sarawak">Sarawak</a></li>
                     <li><a href="blog.php">Blog</a></li>
                     <li><a href="currency_converter.php">Currency Conversion</a></li>
                 </ul>

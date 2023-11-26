@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 // Registration successful
                 echo '<script>alert("Registration successful!");</script>';
-                echo '<script>window.location.href = "Login.html";</script>';
+                echo '<script>window.location.href = "login.php";</script>';
                 exit;
             } else {
                 echo "Error: " . $stmt->error;
@@ -118,7 +118,7 @@ $conn->close();
                 <button type="submit" class="btn btn-primary btn-block">Register</button>
             </form>
             <div class="signup-link">
-                <p>Already have an account? <a href="Login.html">Login</a></p>
+                <p>Already have an account? <a href="login.php">Login</a></p>
             </div>
         </div>
     </div>

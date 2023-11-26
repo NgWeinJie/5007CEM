@@ -55,9 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Execute the statement
                 if ($stmt->execute()) {
                     echo "Destination added successfully!";
-                    // Redirect back to Admin.html
-                    header("Location: Admin.html");
-                    exit; // Make sure to exit to prevent further script execution
+                    header("Location: admin.php?success=true");
+                    exit;
                 } else {
                     echo "Error: " . $stmt->error;
                 }
@@ -230,6 +229,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const isSuccess = urlParams.get('success');
+
+
+    if (isSuccess) {
+
+        alert('Destination added successfully!');
+    }
+</script>
 </body>
 </html>
 
