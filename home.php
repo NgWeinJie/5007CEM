@@ -207,13 +207,6 @@ $resultComments = mysqli_query($conn, $queryComments);
             <div class="collapse navbar-collapse" id="myTopnav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="destinationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
-                        <div class="dropdown-menu" aria-labelledby="destinationsDropdown">
-                                <a class="dropdown-item" href="#sabah" id="sabah-link">Sabah</a>
-                                <a class="dropdown-item" href="#sarawak" id="sarawak-link">Sarawak</a>
-                        </div>
-                    </li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
@@ -375,8 +368,6 @@ $resultComments = mysqli_query($conn, $queryComments);
             <div class="footer-section">
                 <h3>Explore</h3>
                 <ul>
-                    <li><a href="#sabah">Sabah</a></li>
-                    <li><a href="#sarawak">Sarawak</a></li>
                     <li><a href="blog.php">Blog</a></li>
                     <li><a href="currency_converter.php">Currency Conversion</a></li>
                 </ul>
@@ -585,43 +576,6 @@ function createCommentElement(comment) {
         menuList.classList.toggle("active");
     }
 
-    const destinationsDropdown = document.getElementById("destinationsDropdown");
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-    let dropdownOpen = false;
-    let closeTimer; // Variable to store the timer for delayed closing
-
-    // Function to open the dropdown menu when hovering over "Destinations"
-    destinationsDropdown.addEventListener("mouseenter", function () {
-        if (!dropdownOpen) {
-            dropdownMenu.style.display = "block";
-            dropdownOpen = true;
-        }
-    });
-
-    // Function to close the dropdown menu when mouse leaves "Destinations"
-    destinationsDropdown.addEventListener("mouseleave", function () {
-        // Use a setTimeout to introduce a delay before closing the dropdown
-        closeTimer = setTimeout(function () {
-            if (dropdownOpen) {
-                dropdownMenu.style.display = "none";
-                dropdownOpen = false;
-            }
-        }, 500); // Adjust the delay (in milliseconds) as needed
-    });
-
-    // Function to clear the close timer when re-entering the dropdown
-    dropdownMenu.addEventListener("mouseenter", function () {
-        clearTimeout(closeTimer);
-    });
-
-    // Function to close the dropdown menu when mouse leaves the entire navbar
-    const navbar = document.querySelector(".navbar");
-    navbar.addEventListener("mouseleave", function () {
-        if (dropdownOpen) {
-            dropdownMenu.style.display = "none";
-            dropdownOpen = false;
-        }
-    });
 
     // JavaScript code to toggle the visibility of the '.info' element
     const destinationElements = document.querySelectorAll('.destination');
@@ -709,29 +663,7 @@ $(document).ready(function () {
     }
 });
 
-// Scroll to the first destination of Sabah when clicking on the Sabah link
-    document.getElementById("sabah-link").addEventListener("click", function (event) {
-        event.preventDefault();
-        scrollToFirstDestination("Sabah");
-    });
 
-    // Scroll to the first destination of Sarawak when clicking on the Sarawak link
-    document.getElementById("sarawak-link").addEventListener("click", function (event) {
-        event.preventDefault();
-        scrollToFirstDestination("Sarawak");
-    });
-
-    // Function to scroll to the first destination of the specified state
-    function scrollToFirstDestination(state) {
-        const destinations = document.querySelectorAll('.destination');
-        for (const destination of destinations) {
-            const destinationState = destination.querySelector('.state').textContent.trim();
-            if (destinationState === state) {
-                destination.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                break; // Stop after scrolling to the first destination of the specified state
-            }
-        }
-    }
 </script>
 
 </body>
