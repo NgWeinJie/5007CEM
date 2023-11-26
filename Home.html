@@ -45,9 +45,9 @@
                     <li class="nav-item"><a class="nav-link" href="Blog.html">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="Currency Conversion.html">Currency Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Contact Us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="account_details.html">
+                        <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
@@ -85,6 +85,7 @@
         <div class="destination">
             <img src="image/Mount-Kinabalu.png"  alt="Mount Kinabalu Image" id="Mount-Kinabalu"/>
             <h2>Mount Kinabalu</h2>
+            <div class="info">
             <p>Mount Kinabalu, located in the Kinabalu Park World Heritage Site, is celebrated for its diverse flora and fauna at various altitudes. This mountain in the Crocker Range is globally renowned for its remarkable plant and animal biodiversity, featuring species from the Himalayas, Australasia, and Indo-Malaya. Recent surveys estimate an astonishing 5,000 to 6,000 plant species on the mountain, making it one of the world's most vital ecological sites, surpassing the combined count of Europe and North America (excluding tropical regions of Mexico).</p>
             <h4>Entrance Fee:</h4>
             <table>
@@ -102,18 +103,22 @@
                 </tr>
             </table>
             <h4>Open Hours:</h4>
-            <p>Monday ~ Sunday:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9:00 AM - 10:00 PM</p>
+            <p>Monday ~ Sunday:&nbsp;&nbsp;&nbsp;9:00 AM - 10:00 PM</p>
             <h4>Google Maps</h4>
             <a href="https://goo.gl/maps/e5PDZGuUrChfeeED6"><img src="image/Google Maps logo.png" alt="Google Map"></a>
 
         <div class="button-container">
-            <div class="like-dislike">
-                <button class="like-button" data-action="like"><i class="fas fa-thumbs-up"></i></button>
-                <span class="like-count">0</span>
+            <div class='like-dislike'>
+                <button class='like-button <?php echo ($userLikedDestination) ? "liked" : ""; ?>' data-action='like'>
+                    <i class='fas fa-thumbs-up'></i>
+                </button>
+                <span class='like-count'><?php echo $totalLikes; ?></span>
             </div>
-            <div class="like-dislike">
-                <button class="dislike-button" data-action="dislike"><i class="fas fa-thumbs-down"></i></button>
-                <span class="dislike-count">0</span>
+            <div class='like-dislike'>
+                <button class='dislike-button <?php echo ($userDislikedDestination) ? "disliked" : ""; ?>' data-action='dislike'>
+                    <i class='fas fa-thumbs-down'></i>
+                </button>
+                <span class='dislike-count'><?php echo $totalDislikes; ?></span>
             </div>
             <!-- Comment button -->
             <button class="comment-button">Comment</button>
@@ -131,9 +136,11 @@
             </div>
         </div>
 </div>
+            </div>
         <div class="destination">
             <img src="image/Kinabalu-Park-Botanique_1.png" width="600px" height="400px">
             <h2>Kinabalu Park</h2>
+            <div class="info">
             <p>Kinabalu Park, established as a World Heritage Site in 1964, encompasses 754 square kilometers in Sabah, Malaysian Borneo. It gained protected status following the Royal Society Kinabalu Scientific expedition of 1962-1964, led by Professor Corner. The park's main highlight is Mount Kinabalu, standing at 4,095.2 meters, the highest peak between the Himalayas and New Guinea. Its slopes are home to a rich variety of plant and animal species, particularly renowned for its diverse plant life influenced by the Himalayas, China, Australia, the Malay Peninsula, and pan-tropical regions.</p>
             <h4>Entrance Fee:</h4>
             <table>
@@ -178,6 +185,7 @@
                     </form>
                 </div>
             </div>
+        </div>
         </div>
         </div>
         <div class="destination">
@@ -1334,43 +1342,81 @@
 
             // Function to handle the like and dislike button click
             function handleLikeDislikeClick(element) {
-                const action = element.getAttribute("data-action");
-                const countElement = element.nextElementSibling;
+    const action = element.getAttribute("data-action");
+    const destinationID = element.closest('.destination').dataset.destinationId;
+    const countElement = element.nextElementSibling;
 
-                if (action === "like") {
-                    const likeCount = parseInt(countElement.textContent);
-                    countElement.textContent = likeCount + 1;
-                } else if (action === "dislike") {
-                    const dislikeCount = parseInt(countElement.textContent);
-                    countElement.textContent = dislikeCount + 1;
+    console.log("Action: ", action);
+    console.log("Destination ID: ", destinationID);
+
+    // Check if the user has already liked or disliked the destination
+    const isAlreadyLiked = element.classList.contains("liked");
+    const isAlreadyDisliked = element.classList.contains("disliked");
+
+    if (isAlreadyLiked || isAlreadyDisliked) {
+        // You can display a message to the user that they have already liked/disliked this destination
+        console.log("You have already liked/disliked this destination.");
+        return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/WebDevelopmentProject/public_html/handle_like_dislike.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Process successful response
+                const response = JSON.parse(xhr.responseText);
+                console.log("Response: ", response); // Log the response for debugging
+
+                // Update the like and dislike counts on the client side
+                if (response.totalLikes !== undefined) {
+                    countElement.textContent = response.totalLikes;
                 }
+
+                if (response.totalDislikes !== undefined) {
+                    // Update the dislike count
+                    const dislikeCountElement = element.closest('.destination').querySelector('.dislike-count');
+                    dislikeCountElement.textContent = response.totalDislikes;
+                }
+
+                // Update the button appearance based on the action
+                if (action === "like") {
+                    element.classList.add("liked");
+                } else if (action === "dislike") {
+                    element.classList.add("disliked");
+                }
+            } else {
+                console.error("Failed to handle like/dislike action. HTTP Status: " + xhr.status);
             }
+        }
+    };
+
+    // Use encodeURIComponent to properly encode the data
+    const data = `action=${encodeURIComponent(action)}&destinationID=${encodeURIComponent(destinationID)}`;
+    xhr.send(data);
+}
 
             // Event delegation for like and dislike buttons
-            document.addEventListener("click", function (event) {
-                if (event.target.classList.contains("like-button") || event.target.classList.contains("dislike-button")) {
-                    handleLikeDislikeClick(event.target);
-                    console.log("Button clicked");
-                }
-            });
+     document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("like-button") || event.target.classList.contains("dislike-button")) {
+        handleLikeDislikeClick(event.target);
+        console.log("Button clicked");
+    }
 
-            // Event listener for the comment buttons
-            const commentButtons = document.querySelectorAll(".comment-button");
-            commentButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    const commentForm = this.parentElement.querySelector(".comment-popup-container");
-                    toggleCommentSection(commentForm);
-                });
-            });
-
-            // Event listener for the close button in the comment popup
-            const closeButtons = document.querySelectorAll(".close-button");
-            closeButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    const commentForm = this.closest(".comment-form");
-                    toggleCommentSection(commentForm);
-                });
-            });
+     // Event listener for the comment buttons and the close button in the comment popup
+    document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("comment-button")) {
+            // Handle "Comment" button click
+            const commentForm = event.target.parentElement.querySelector(".comment-popup-container");
+            toggleCommentSection(commentForm);
+        } else if (event.target.classList.contains("close-button")) {
+            // Handle "X" button click to close the popup
+            const commentForm = event.target.closest(".comment-popup-container");
+            toggleCommentSection(commentForm);
+        }
+    });
 
             // Get the button element (make sure this button exists in your HTML)
             var backButton = document.getElementById("back-to-top-btn");
@@ -1434,8 +1480,35 @@ navbar.addEventListener("mouseleave", function () {
         dropdownOpen = false;
     }
 });
-        
-        
+
+// JavaScript code to toggle the visibility of the '.info' element
+const destinationElements = document.querySelectorAll('.destination');
+
+destinationElements.forEach(function (element) {
+    // Find the '.info' element inside the '.destination'
+    const infoElement = element.querySelector('.info');
+
+    // Add click event listeners to the 'img' and 'h2' elements
+    const imgElement = element.querySelector('img');
+    const h2Element = element.querySelector('h2');
+
+    imgElement.addEventListener('click', function () {
+        toggleInfoVisibility(infoElement);
+    });
+
+    h2Element.addEventListener('click', function () {
+        toggleInfoVisibility(infoElement);
+    });
+});
+
+function toggleInfoVisibility(infoElement) {
+    // Toggle the visibility of the '.info' element
+    if (infoElement.style.display === 'none' || infoElement.style.display === '') {
+        infoElement.style.display = 'block';
+    } else {
+        infoElement.style.display = 'none';
+    }
+}
 
     </script>
 

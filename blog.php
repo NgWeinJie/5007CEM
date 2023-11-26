@@ -103,7 +103,7 @@ mysqli_close($conn);
             <!-- Nav menu containing the list of links -->
             <div class="collapse navbar-collapse" id="myTopnav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="destinationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Destinations</a>
                         <div class="dropdown-menu" aria-labelledby="destinationsDropdown">
@@ -111,17 +111,17 @@ mysqli_close($conn);
                             <a class="dropdown-item" href="#sarawak">Sarawak</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="Blog.html">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Currency Conversion.html">Currency Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
                     <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Contact Us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="account_details.html">
+                        <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Login.html">
+                        <a class="nav-link" href="login.php">
                             <i class="fas fa-sign-out-alt logout-icon"></i> Logout
                         </a>
                     </li>
@@ -140,25 +140,29 @@ mysqli_close($conn);
             }
             ?>
     <main>
-    <section id="post-form">
+        <section id="post-form" class="container">
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
             <h2>Create a New Post</h2>
-            <div class="form-container">
-                <div class="form-group">
-                    <label for="post-title">Title:</label>
-                    <input type="text" id="post-title" name="post-title" required>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="post-title">Title:</label>
+                        <input type="text" class="form-control" id="post-title" name="post-title" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="post-content">Content:</label>
-                    <textarea id="post-content" name="post-content" required></textarea>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="post-content">Content:</label>
+                        <textarea class="form-control" id="post-content" name="post-content" required></textarea>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="post-media">Attach Media:</label>
-                    <input type="file" id="post-media" name="post-media" accept="image/*, video/*">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="submit">Publish Post</button>
-                </div>
+            </div>
+            <div class="form-group">
+                <label for="post-media">Attach Media:</label>
+                <input type="file" class="form-control-file" id="post-media" name="post-media" accept="image/*, video/*">
+            </div>
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-primary">Publish Post</button>
             </div>
         </form>
     </section>
@@ -210,8 +214,8 @@ mysqli_close($conn);
                 <ul>
                     <li><a href="#sabah">Sabah</a></li>
                     <li><a href="#sarawak">Sarawak</a></li>
-                    <li><a href="Blog.html">Blog</a></li>
-                    <li><a href="Currency Conversion.html">Currency Conversion</a></li>
+                    <li><a href="blog.php">Blog</a></li>
+                    <li><a href="currency_converter.php">Currency Conversion</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -223,9 +227,9 @@ mysqli_close($conn);
             </div>
             <div class="footer-section">
                 <h3>Contact</h3>
-                <p>Email: travelpro@support.com</p>
-                <p>Phone: +6011-462-7221</p>
-                <p><a href="Contact Us.html">Contact Form</a></p>
+                <p>&nbsp;&nbsp;&nbsp;Email: travelpro@support.com</p>
+                <p>&nbsp;&nbsp;&nbsp;Phone: +6011-462-7221</p>
+                <p><a href="contact_us.php">&nbsp;&nbsp;&nbsp;Contact Form</a></p>
             </div>
         </div>
         <div class="copyright">

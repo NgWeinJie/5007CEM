@@ -80,6 +80,21 @@ button:hover {
     z-index: 1;
 }
 
+#posts {
+    max-height: 800px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+
+#posts::-webkit-scrollbar {
+    width: 6px;
+}
+
+#posts::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
 
 
 /* Media query for screens with a maximum width of 428px (iPhone 12 Pro and smaller screens) */

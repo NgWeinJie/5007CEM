@@ -10,10 +10,6 @@
     <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <!-- Bootstrap JavaScript dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -77,7 +73,7 @@
                         <label for="phoneNumber" class="form-label">Phone Number</label>
                         <input type="tel" class="form-control" id="phoneNumber" value="123-456-7890" readonly>
                     </div>
-                    <button type="button" class="btn btn-primary d-block mx-auto mt-5 mb-5">Edit</button>
+                    <button type="button" id="editButton" class="btn btn-primary d-block mx-auto mt-5 mb-5">Edit</button>
                 </form>
             </div>
         </div>
@@ -113,42 +109,59 @@
         </div>
     </footer>
 
-    <!-- Link to Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Link to Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        // JavaScript to handle the edit button click event
-        document.getElementById('editButton').addEventListener('click', function () {
-            // Enable form fields for editing
-            document.getElementById('userName').readOnly = false;
-            document.getElementById('email').readOnly = false;
-            document.getElementById('phoneNumber').readOnly = false;
-            // Show the submit button and hide the edit button
-            document.getElementById('submitButton').style.display = 'block';
-            document.getElementById('editButton').style.display = 'none';
-        });
+<script>
+    // JavaScript to handle the edit button click event
+    document.addEventListener('DOMContentLoaded', function () {
+        const editButton = document.getElementById('editButton');
+        if (editButton) {
+            editButton.addEventListener('click', function () {
+                // Enable form fields for editing
+                document.getElementById('userName').readOnly = false;
+                document.getElementById('email').readOnly = false;
+                document.getElementById('phoneNumber').readOnly = false;
+                // Show the submit button
+                const submitButton = document.getElementById('submitButton');
+                if (submitButton) {
+                    submitButton.style.display = 'block';
+                }
+                // Hide the edit button
+                editButton.style.display = 'none';
+            });
+        }
 
         // JavaScript to handle the form submission (you can replace this with your backend code)
-        document.getElementById('accountDetailsForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Collect the updated data and send it to the server
-            const updatedData = {
-                userName: document.getElementById('userName').value,
-                email: document.getElementById('email').value,
-                phoneNumber: document.getElementById('phoneNumber').value
-            };
-            // Here, you can make an AJAX request to update the user's account details on the server
-            // After updating, you can disable form fields again and show the edit button
-            // For demonstration purposes, we'll just alert the updated data
-            alert('Updated Data:\n' + JSON.stringify(updatedData, null, 2));
-            document.getElementById('userName').readOnly = true;
-            document.getElementById('email').readOnly = true;
-            document.getElementById('phoneNumber').readOnly = true;
-            document.getElementById('submitButton').style.display = 'none';
-            document.getElementById('editButton').style.display = 'block';
-        });
-    </script>
+        const accountDetailsForm = document.getElementById('accountDetailsForm');
+        if (accountDetailsForm) {
+            accountDetailsForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // Collect the updated data and send it to the server
+                const updatedData = {
+                    userName: document.getElementById('userName').value,
+                    email: document.getElementById('email').value,
+                    phoneNumber: document.getElementById('phoneNumber').value
+                };
+                // Here, you can make an AJAX request to update the user's account details on the server
+                // After updating, you can disable form fields again and show the edit button
+                // For demonstration purposes, we'll just alert the updated data
+                alert('Updated Data:\n' + JSON.stringify(updatedData, null, 2));
+                document.getElementById('userName').readOnly = true;
+                document.getElementById('email').readOnly = true;
+                document.getElementById('phoneNumber').readOnly = true;
+                // Hide the submit button
+                const submitButton = document.getElementById('submitButton');
+                if (submitButton) {
+                    submitButton.style.display = 'none';
+                }
+                // Show the edit button
+                editButton.style.display = 'block';
+            });
+        }
+    });
+</script>
 </body>
 </html>

@@ -82,7 +82,6 @@ h2 {
 /* Style for each destination div */
 .destination {
     width: 48%; /* Adjust the width as needed for spacing */
-    height: 1200px;
     margin-bottom: 20px;
     margin-top: 20px;
     background-color: rgba(236, 219, 199, 0.7);
@@ -298,7 +297,38 @@ a:hover {
     background-color: #0056b3;
 }
 
+.info {
+    display: none;
+}
 
+.search-bar {
+    margin-top: 20px;
+}
+
+.search-bar form {
+    display: flex;
+}
+
+.search-bar input {
+    padding: 10px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+    border: 1px solid #0056b3;
+}
 
 /* Media query for iPhone 12 Pro and smaller screens in Home.css */
 @media only screen and (max-width: 428px) {
@@ -316,7 +346,7 @@ a:hover {
     /* Style the h1 heading for Sabah */
     h1#sabah, #sarawak {
         padding: 0px;
-        width: 96.5%;
+        width: 89%;
         margin: auto;
     }
 
@@ -337,7 +367,7 @@ a:hover {
         width: 90%; /* Full width on smaller screens */
         height: auto; /* Allow height to adjust based on content */
         padding: 20px; /* Adjust padding as needed */
-        margin-right: 8px;
+        margin-right: 0px;
     }
 
     /* Style the table headers and cells within destinations on smaller screens */
@@ -352,5 +382,25 @@ a:hover {
         height: 30px;
     }
     
+    /* Style for comment button */
+    .comment-button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-left: 40px;
+    }
+    
+    .search-bar {
+        max-width: 300px; /* Adjust the maximum width for small screens */
+    }
+
+    .search-bar input,
+    .search-bar button {
+        padding: 10px; /* Adjust the padding for small screens */
+        height: 40px; /* Adjust the height for small screens */
+    }
 
 }
