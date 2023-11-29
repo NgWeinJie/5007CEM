@@ -190,6 +190,7 @@ $resultComments = mysqli_query($conn, $queryComments);
         background-color: #0056b3;
         border: 1px solid #0056b3;
     }
+    
 </style>
 
 
@@ -209,18 +210,23 @@ $resultComments = mysqli_query($conn, $queryComments);
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
-                        </a>
-                    </li>
+                         <li class="nav-item">
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['UserID'])) {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-out-alt logout-icon"></i> Logout</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt login-icon"></i> Login</a>';
+                            }
+                            ?>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -244,7 +250,7 @@ $resultComments = mysqli_query($conn, $queryComments);
                 <a href="#Semenggoh Wildlife Centre"><img src="image/Semenggoh Wildlife Centre.jpg" alt="Slide 3"></a>
             </div>
         </div>
-    <center><a href="Home.html"><img src="image/logo.png" alt="travel Logo" class="logo"></a></center>
+    <center><a href="home.php"><img src="image/logo.png" alt="travel Logo" class="logo"></a></center>
     
 <div class="search-bar">
     <form id="searchForm">
@@ -375,8 +381,8 @@ $resultComments = mysqli_query($conn, $queryComments);
             <div class="footer-section">
                 <h3>Information</h3>
                 <ul>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="AboutUs.php">About Us</a></li>
+                    <li><a href="PrivacyPolicy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -391,280 +397,285 @@ $resultComments = mysqli_query($conn, $queryComments);
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log("DOMContentLoaded event listener is running");
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOMContentLoaded event listener is running");
 
-        function toggleCommentSection(commentSection) {
-            if (commentSection.style.display === 'none' || commentSection.style.display === '') {
-                commentSection.style.display = 'block';
-            } else {
-                commentSection.style.display = 'none';
-            }
-        }
+            // Add a global variable to track user login status
+            let userLoggedIn = false;
 
-        let slideIndex = 1;
+            // Check user login status (you need to replace this with your actual login check logic)
+            // For example, you might have a function like checkUserLogin() that returns true if the user is logged in
+            // userLoggedIn = checkUserLogin();
 
-        function showSlides() {
-            const slides = document.querySelectorAll('.slide');
-
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = 'none';
-            }
-
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-
-            slides[slideIndex - 1].style.display = 'block';
-
-            slideIndex++;
-
-            setTimeout(showSlides, 3000); // Change slide every 3 seconds (adjust as needed)
-        }
-
-        showSlides(); // Start the slideshow
-
-        // Function to handle the like and dislike button click
-        function handleLikeDislikeClick(element) {
-            const action = element.getAttribute("data-action");
-            const destinationID = element.closest('.destination').dataset.destinationId;
-            const countElement = element.nextElementSibling;
-
-            console.log("Action: ", action);
-            console.log("Destination ID: ", destinationID);
-
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/WebDevelopmentProject/public_html/handle_like_dislike.php", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        // Process successful response
-                        const response = JSON.parse(xhr.responseText);
-                        console.log("Response: ", response); // Log the response for debugging
-
-                        // Update the like and dislike counts on the client side
-                        if (response.totalLikes !== undefined) {
-                            countElement.textContent = response.totalLikes;
-                        }
-
-                        if (response.totalDislikes !== undefined) {
-                            // Update the dislike count
-                            const dislikeCountElement = element.closest('.destination').querySelector('.dislike-count');
-                            dislikeCountElement.textContent = response.totalDislikes;
-                        }
+            function toggleCommentSection(commentSection) {
+                if (userLoggedIn) {
+                    if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+                        commentSection.style.display = 'block';
                     } else {
-                        console.error("Failed to handle like/dislike action. HTTP Status: " + xhr.status);
+                        commentSection.style.display = 'none';
                     }
+                } else {
+                    // You can customize this message or redirect the user to the login page
+                    if (confirm("Please log in to leave a comment. Do you want to login now?")) {
+                        window.location.href = "login.php"; // Replace with your login page URL
+                    }
+                }
+            }
+
+            let slideIndex = 1;
+
+            function showSlides() {
+                const slides = document.querySelectorAll('.slide');
+
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = 'none';
+                }
+
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                }
+
+                slides[slideIndex - 1].style.display = 'block';
+
+                slideIndex++;
+
+                setTimeout(showSlides, 3000); // Change slide every 3 seconds (adjust as needed)
+            }
+
+            showSlides(); // Start the slideshow
+
+            // Function to handle the like and dislike button click
+            function handleLikeDislikeClick(element) {
+                const action = element.getAttribute("data-action");
+                const destinationID = element.closest('.destination').dataset.destinationId;
+                const countElement = element.nextElementSibling;
+
+                console.log("Action: ", action);
+                console.log("Destination ID: ", destinationID);
+
+                if (userLoggedIn) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/WebDevelopmentProject/public_html/handle_like_dislike.php", true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                // Process successful response
+                                const response = JSON.parse(xhr.responseText);
+                                console.log("Response: ", response); // Log the response for debugging
+
+                                // Update the like and dislike counts on the client side
+                                if (response.totalLikes !== undefined) {
+                                    countElement.textContent = response.totalLikes;
+                                }
+
+                                if (response.totalDislikes !== undefined) {
+                                    // Update the dislike count
+                                    const dislikeCountElement = element.closest('.destination').querySelector('.dislike-count');
+                                    dislikeCountElement.textContent = response.totalDislikes;
+                                }
+                            } else {
+                                console.error("Failed to handle like/dislike action. HTTP Status: " + xhr.status);
+                            }
+                        }
+                    };
+                    // Use encodeURIComponent to properly encode the data
+                    const data = `action=${encodeURIComponent(action)}&destinationID=${encodeURIComponent(destinationID)}`;
+                    xhr.send(data);
+                } else {
+                    // You can customize this message or redirect the user to the login page
+                    if (confirm("Please log in to like or dislike. Do you want to login now?")) {
+                        window.location.href = "login.php"; // Replace with your login page URL
+                    }
+                }
+            }
+
+            // Event delegation for like and dislike buttons
+            document.addEventListener("click", function (event) {
+                if (event.target.classList.contains("like-button") || event.target.classList.contains("dislike-button")) {
+                    handleLikeDislikeClick(event.target);
+                    console.log("Button clicked");
+                }
+            });
+
+            document.addEventListener("click", function (event) {
+                if (event.target.classList.contains("submit-comment")) {
+                    const destinationID = event.target.getAttribute("data-destination-id");
+                    const commentText = event.target.parentElement.querySelector("textarea").value;
+
+                    if (userLoggedIn) {
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/WebDevelopmentProject/public_html/handle-comment.php", true);
+                        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 200) {
+                                    try {
+                                        const response = JSON.parse(xhr.responseText);
+
+                                        if (response.success) {
+                                            // Clear the existing comments for the specific destination
+                                            const commentSection = document.querySelector(`.comment-section[data-destination-id="${destinationID}"]`);
+                                            commentSection.innerHTML = "";
+
+                                            // Display the updated comments
+                                            response.comments.forEach(function (comment) {
+                                                const commentContainer = createCommentElement(comment);
+                                                commentSection.appendChild(commentContainer);
+                                            });
+
+                                            // Clear the textarea after successful submission
+                                            event.target.parentElement.querySelector("textarea").value = "";
+                                        } else {
+                                            console.error("Failed to handle comment submission. Error: ", response.error);
+                                        }
+                                    } catch (error) {
+                                        console.error("Error parsing JSON response: ", error);
+                                    }
+                                } else {
+                                    console.error("Failed to handle comment submission. HTTP Status: " + xhr.status);
+                                }
+                            }
+                        };
+                        const data = `action=submit&destinationID=${encodeURIComponent(destinationID)}&commentText=${encodeURIComponent(commentText)}`;
+                        xhr.send(data);
+                    } else {
+                        // You can customize this message or redirect the user to the login page
+                        if (confirm("Please log in to submit a comment. Do you want to login now?")) {
+                            window.location.href = "login.php"; // Replace with your login page URL
+                        }
+                    }
+                }
+            });
+
+            // Function to create a comment element
+            function createCommentElement(comment) {
+                const commentContainer = document.createElement("div");
+                commentContainer.classList.add("comment-container");
+
+                const userAvatar = document.createElement("img");
+                userAvatar.src = "image/user.png";
+                userAvatar.alt = "User Avatar";
+                userAvatar.classList.add("user-avatar");
+
+                const commentDetails = document.createElement("div");
+                commentDetails.classList.add("comment-details");
+
+                const userName = document.createElement("p");
+                userName.classList.add("user-name");
+                userName.textContent = comment.Username;
+
+                const commentText = document.createElement("p");
+                commentText.classList.add("comment-text");
+                commentText.textContent = comment.CommentText;
+
+                const timestamp = document.createElement("p");
+                timestamp.classList.add("timestamp");
+                timestamp.textContent = comment.created_at;
+
+                commentDetails.appendChild(userName);
+                commentDetails.appendChild(commentText);
+                commentDetails.appendChild(timestamp);
+
+                commentContainer.appendChild(userAvatar);
+                commentContainer.appendChild(commentDetails);
+
+                return commentContainer;
+            }
+
+            var backButton = document.getElementById("back-to-top-btn");
+
+            window.onscroll = function () {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backButton.style.display = "block";
+                } else {
+                    backButton.style.display = "none";
                 }
             };
-            // Use encodeURIComponent to properly encode the data
-            const data = `action=${encodeURIComponent(action)}&destinationID=${encodeURIComponent(destinationID)}`;
-            xhr.send(data);
-        }
 
-        // Event delegation for like and dislike buttons
-        document.addEventListener("click", function (event) {
-            if (event.target.classList.contains("like-button") || event.target.classList.contains("dislike-button")) {
-                handleLikeDislikeClick(event.target);
-                console.log("Button clicked");
+            backButton.onclick = function () {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            };
+
+            function toggleMenu() {
+                var menuList = document.getElementById("myTopnav");
+                menuList.classList.toggle("active");
             }
-        });
 
-    document.addEventListener("click", function (event) {
-        if (event.target.classList.contains("submit-comment")) {
-            const destinationID = event.target.getAttribute("data-destination-id");
-            const commentText = event.target.parentElement.querySelector("textarea").value;
+            const destinationElements = document.querySelectorAll('.destination');
 
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/WebDevelopmentProject/public_html/handle-comment.php", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            destinationElements.forEach(function (element) {
+                const infoElement = element.querySelector('.info');
 
-            xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    try {
-                        const response = JSON.parse(xhr.responseText);
+                const imgElement = element.querySelector('img');
+                const h2Element = element.querySelector('h2');
 
-                        if (response.success) {
-                            // Clear the existing comments for the specific destination
-                            const commentSection = document.querySelector(`.comment-section[data-destination-id="${destinationID}"]`);
-                            commentSection.innerHTML = "";
+                imgElement.addEventListener('click', function () {
+                    toggleInfoVisibility(infoElement);
+                });
 
-                            // Display the updated comments
-                            response.comments.forEach(function (comment) {
-                                const commentContainer = createCommentElement(comment);
-                                commentSection.appendChild(commentContainer);
-                            });
+                h2Element.addEventListener('click', function () {
+                    toggleInfoVisibility(infoElement);
+                });
+            });
 
-                            // Clear the textarea after successful submission
-                            event.target.parentElement.querySelector("textarea").value = "";
-                        } else {
-                            console.error("Failed to handle comment submission. Error: ", response.error);
+            function toggleInfoVisibility(infoElement) {
+                if (infoElement.style.display === 'none' || infoElement.style.display === '') {
+                    infoElement.style.display = 'block';
+                } else {
+                    infoElement.style.display = 'none';
+                }
+            }
+
+            $(document).ready(function () {
+                $('#searchForm').submit(function (e) {
+                    e.preventDefault();
+
+                    var searchQuery = $('#searchInput').val();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost/api/destination/search.php',
+                        data: { s: searchQuery },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.records && response.records.length > 0) {
+                                console.log('Search results:', response.records);
+
+                                var firstDestinationID = response.records[0].DestinationID;
+                                scrollToDestination(firstDestinationID);
+                            } else {
+                                displayNoResultsMessage();
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
                         }
-                    } catch (error) {
-                        console.error("Error parsing JSON response: ", error);
+                    });
+                });
+
+                function scrollToDestination(destinationID) {
+                    var destinationElement = document.querySelector('.destination[data-destination-id="' + destinationID + '"]');
+                    if (destinationElement) {
+                        destinationElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                } else {
-                    console.error("Failed to handle comment submission. HTTP Status: " + xhr.status);
                 }
-            }
-        };
-        const data = `action=submit&destinationID=${encodeURIComponent(destinationID)}&commentText=${encodeURIComponent(commentText)}`;
-        xhr.send(data);
-    }
-});
 
-// Function to create a comment element
-function createCommentElement(comment) {
-    const commentContainer = document.createElement("div");
-    commentContainer.classList.add("comment-container");
+                function displayNoResultsMessage() {
+                    var messageElement = document.createElement('p');
+                    messageElement.textContent = 'No results found.';
 
-    const userAvatar = document.createElement("img");
-    userAvatar.src = "image/user.png";
-    userAvatar.alt = "User Avatar";
-    userAvatar.classList.add("user-avatar");
-
-    const commentDetails = document.createElement("div");
-    commentDetails.classList.add("comment-details");
-
-    const userName = document.createElement("p");
-    userName.classList.add("user-name");
-    userName.textContent = comment.Username;
-
-    const commentText = document.createElement("p");
-    commentText.classList.add("comment-text");
-    commentText.textContent = comment.CommentText;
-
-    const timestamp = document.createElement("p");
-    timestamp.classList.add("timestamp");
-    timestamp.textContent = comment.created_at;
-
-    commentDetails.appendChild(userName);
-    commentDetails.appendChild(commentText);
-    commentDetails.appendChild(timestamp);
-
-    commentContainer.appendChild(userAvatar);
-    commentContainer.appendChild(commentDetails);
-
-    return commentContainer;
-}
-
-        // Get the button element (make sure this button exists in your HTML)
-        var backButton = document.getElementById("back-to-top-btn");
-
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                backButton.style.display = "block";
-            } else {
-                backButton.style.display = "none";
-            }
-        };
-
-        // Scroll to the top of the document when the button is clicked
-        backButton.onclick = function () {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
-        };
-    });
-
-    function toggleMenu() {
-        var menuList = document.getElementById("myTopnav");
-        menuList.classList.toggle("active");
-    }
-
-
-    // JavaScript code to toggle the visibility of the '.info' element
-    const destinationElements = document.querySelectorAll('.destination');
-
-    destinationElements.forEach(function (element) {
-        // Find the '.info' element inside the '.destination'
-        const infoElement = element.querySelector('.info');
-
-        // Add click event listeners to the 'img' and 'h2' elements
-        const imgElement = element.querySelector('img');
-        const h2Element = element.querySelector('h2');
-
-        imgElement.addEventListener('click', function () {
-            toggleInfoVisibility(infoElement);
-        });
-
-        h2Element.addEventListener('click', function () {
-            toggleInfoVisibility(infoElement);
-        });
-    });
-
-    function toggleInfoVisibility(infoElement) {
-        // Toggle the visibility of the '.info' element
-        if (infoElement.style.display === 'none' || infoElement.style.display === '') {
-            infoElement.style.display = 'block';
-        } else {
-            infoElement.style.display = 'none';
-        }
-    }
-$(document).ready(function () {
-    // Handle form submission
-    $('#searchForm').submit(function (e) {
-        e.preventDefault(); // Prevent default form submission
-
-        // Get the search input value
-        var searchQuery = $('#searchInput').val();
-
-        // Make AJAX request to search.php
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost/api/destination/search.php',
-            data: { s: searchQuery },
-            dataType: 'json',
-            success: function (response) {
-                // Example: Display results in the console
-                if (response.records && response.records.length > 0) {
-                    console.log('Search results:', response.records);
-
-                    // Get the first destination ID from the search results
-                    var firstDestinationID = response.records[0].DestinationID;
-
-                    // Scroll to the destination with the found ID
-                    scrollToDestination(firstDestinationID);
-                } else {
-                    // No results found, display a message on the user's page
-                    displayNoResultsMessage();
+                    var resultsContainer = document.querySelector('.content');
+                    resultsContainer.innerHTML = '';
+                    resultsContainer.appendChild(messageElement);
                 }
-            },
-            error: function (xhr, status, error) {
-                // Handle errors
-                console.error('Error:', error);
-            }
+            });
         });
-    });
-
-    // Function to scroll to the destination with the given ID
-    function scrollToDestination(destinationID) {
-        var destinationElement = document.querySelector('.destination[data-destination-id="' + destinationID + '"]');
-        if (destinationElement) {
-            destinationElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    // Function to display a message when no results are found
-    function displayNoResultsMessage() {
-        // Create a message element
-        var messageElement = document.createElement('p');
-        messageElement.textContent = 'No results found.';
-
-        // Append the message element to a specific location on your webpage
-        // For example, assuming you have a container with the ID "searchResultsContainer"
-        var resultsContainer = document.querySelector('.content'); // Change this to the appropriate container
-        resultsContainer.innerHTML = ''; // Clear previous results
-        resultsContainer.appendChild(messageElement);
-    }
-});
-
-
-</script>
+    </script>
 
 </body>
 </html>

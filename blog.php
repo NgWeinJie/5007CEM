@@ -106,18 +106,23 @@ mysqli_close($conn);
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['UserID'])) {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-out-alt logout-icon"></i> Logout</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt login-icon"></i> Login</a>';
+                            }
+                            ?>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -134,7 +139,8 @@ mysqli_close($conn);
             ?>
     <main>
         <section id="post-form" class="container">
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+       <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" 
+          enctype="multipart/form-data" onsubmit="event.preventDefault(); checkLoginAndSubmit();" id="blog-post-form">
             <h2>Create a New Post</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -212,8 +218,8 @@ mysqli_close($conn);
             <div class="footer-section">
                 <h3>Information</h3>
                 <ul>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="AboutUs.php">About Us</a></li>
+                    <li><a href="PrivacyPolicy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -227,12 +233,27 @@ mysqli_close($conn);
             &copy; 2023 Travel Pro [Sabah & Sarawak Travel Recommendation and Blog]
         </div>
     </footer>
-        <script>
+<script>
 function toggleMenu() {
-        var menuList = document.getElementById("myTopnav");
-        menuList.classList.toggle("active");
-    }
+    var menuList = document.getElementById("myTopnav");
+    menuList.classList.toggle("active");
+}
 
-        </script>
+function checkLoginAndSubmit() {
+    // Check if the user is logged in
+    <?php if (isset($_SESSION['UserID'])) : ?>
+        // If logged in, submit the form
+        document.getElementById('blog-post-form').submit();
+    <?php else : ?>
+        // If not logged in, display a confirmation dialog
+        var confirmSubmit = confirm('You are not logged in. Do you want to login page for pulish post?');
+        
+        // If the user chooses to go to the login page, redirect
+        if (confirmSubmit) {
+            window.location.href = 'login.php';
+        }
+    <?php endif; ?>
+}
+</script>
 </body>
 </html>

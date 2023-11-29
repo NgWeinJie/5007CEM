@@ -38,38 +38,6 @@ function fetchAccountDetails($conn, $identifier)
     }
 }
 
-// Handle updating account details if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect the updated data
-    $updatedUserName = $_POST['userName'];
-    $updatedEmail = $_POST['email'];
-    $updatedPhoneNumber = $_POST['phoneNumber'];
-
-    // Update the user information in the database
-    $updateQuery = "UPDATE `user` SET Username=?, Email=?, Phone_Number=? WHERE UserID=?";
-    $updateStmt = mysqli_prepare($conn, $updateQuery);
-
-    if ($updateStmt) {
-        mysqli_stmt_bind_param($updateStmt, "sssi", $updatedUserName, $updatedEmail, $updatedPhoneNumber, $_SESSION['UserID']);
-        $success = mysqli_stmt_execute($updateStmt);
-
-        if ($success) {
-            // Update the session variables if needed
-            $_SESSION['Username'] = $updatedUserName;
-            $_SESSION['Email'] = $updatedEmail;
-            $_SESSION['Phone_Number'] = $updatedPhoneNumber;
-            $successMessage = "Account details updated successfully!";
-        } else {
-            $errorMessage = "Error updating account details.";
-        }
-
-        // Close the statement
-        mysqli_stmt_close($updateStmt);
-    } else {
-        $errorMessage = "Error preparing update statement.";
-    }
-}
-
 // Fetch account details if the user is authenticated
 if (isset($_SESSION['UserID']) || isset($_SESSION['Email'])) {
     $identifier = isset($_SESSION['UserID']) ? $_SESSION['UserID'] : $_SESSION['Email'];
@@ -85,6 +53,17 @@ if (isset($_SESSION['UserID']) || isset($_SESSION['Email'])) {
         // Handle the case where fetching account details fails
         $errorMessage = "Error fetching account details.";
     }
+} else {
+    // User is not authenticated, prompt them to log in or go back to the home page
+    echo "<script>
+            var wantToLogin = confirm('You are not logged in. Do you want to go to the login page?');
+            if (wantToLogin) {
+                window.location.href = 'login.php';
+            } else {
+                window.location.href = 'home.php';
+            }
+          </script>";
+    exit(); // Stop further execution of the page
 }
 ?>
 
@@ -120,18 +99,23 @@ if (isset($_SESSION['UserID']) || isset($_SESSION['Email'])) {
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['UserID'])) {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-out-alt logout-icon"></i> Logout</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt login-icon"></i> Login</a>';
+                            }
+                            ?>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -188,8 +172,8 @@ if (isset($_SESSION['UserID']) || isset($_SESSION['Email'])) {
             <div class="footer-section">
                 <h3>Information</h3>
                 <ul>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="AboutUs.php">About Us</a></li>
+                    <li><a href="PrivacyPolicy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">

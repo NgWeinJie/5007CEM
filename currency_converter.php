@@ -82,18 +82,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['UserID'])) {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-out-alt logout-icon"></i> Logout</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt login-icon"></i> Login</a>';
+                            }
+                            ?>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -164,8 +169,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="footer-section">
                 <h3>Information</h3>
                 <ul>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="AboutUs.php">About Us</a></li>
+                    <li><a href="PrivacyPolicy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">

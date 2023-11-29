@@ -71,18 +71,23 @@ unset($_SESSION['errorMessage']);
                     <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="currency_converter.php">Currency Conversion</a></li>
-                    <li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="AboutUs.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact_us.php">Contact Us</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="account_details.php">
                             <i class="fas fa-user account-icon"></i> Account Details
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="fas fa-sign-out-alt logout-icon"></i> Logout
-                        </a>
-                    </li>
+                        <li class="nav-item">
+                            <?php
+                            // Check if the user is logged in
+                            if (isset($_SESSION['UserID'])) {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-out-alt logout-icon"></i> Logout</a>';
+                            } else {
+                                echo '<a class="nav-link" href="login.php"><i class="fas fa-sign-in-alt login-icon"></i> Login</a>';
+                            }
+                            ?>
+                        </li>
                 </ul>
             </div>
         </div>
@@ -104,7 +109,7 @@ unset($_SESSION['errorMessage']);
             ?>
         <table>
             <tr>
-                  <form action="" method="post">
+                 <form action="" method="post" onsubmit="return checkLoginBeforeSubmit();">
                     <td>User Name: </td>
                     <td><input type="text" name="username" placeholder="User Name" required></td>
             <tr>
@@ -143,8 +148,8 @@ unset($_SESSION['errorMessage']);
             <div class="footer-section">
                 <h3>Information</h3>
                 <ul>
-                    <li><a href="AboutUs.html">About Us</a></li>
-                    <li><a href="PrivacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="AboutUs.php">About Us</a></li>
+                    <li><a href="PrivacyPolicy.php">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -158,24 +163,22 @@ unset($_SESSION['errorMessage']);
             &copy; 2023 Travel Pro [Sabah & Sarawak Travel Recommendation and Blog]
         </div>
     </footer>
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Set the duration in milliseconds (2 seconds in this example)
-            var duration = 3000;
-
-            // Get the success message element
-            var successMessage = document.getElementById("successMessage");
-
-            // Show the success message
-            if (successMessage) {
-                successMessage.style.display = "block";
-
-                // Hide the success message after the specified duration
-                setTimeout(function () {
-                    successMessage.style.display = "none";
-                }, duration);
-            }
-        });
-        </script>
+<script>
+function checkLoginBeforeSubmit() {
+    // Check if the user is logged in
+    <?php if (!isset($_SESSION['UserID'])) : ?>
+        // If not logged in, display a confirmation dialog
+        var confirmSubmit = confirm('You are not logged in. Do you want to login page for submit the contact form?');
+        
+        // If the user chooses to go to the login page, prevent form submission
+        if (confirmSubmit) {
+            window.location.href = 'login.php';
+            return false; // Prevent form submission
+        }
+    <?php endif; ?>
+    // If logged in, allow the form to be submitted
+    return true;
+}
+</script>
     </body>
 </html>
